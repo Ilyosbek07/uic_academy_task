@@ -76,6 +76,7 @@ async def callback(call: types.CallbackQuery,state:FSMContext):
         )
         await call.message.edit_text(text, reply_markup=buttons)
     for i in range(1, 21):
+        await call.message.delete()
         if call.data in all_images:
             try:
                 item = product_detail(all_images[f'{call.data}'])
@@ -86,6 +87,7 @@ async def callback(call: types.CallbackQuery,state:FSMContext):
             except Exception as err:
                 print(err)
                 await call.message.answer('😬 Xatolik ro"y berdi qaytadan urinib ko"ring')
+            await state.finish()
             break
 
 
