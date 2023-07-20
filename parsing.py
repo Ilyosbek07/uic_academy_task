@@ -5,10 +5,10 @@ headers = {
     'Accept': '*/*',
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
 }
-
+q = {"key" : "macbook"}
 site = requests.get(
-    'https://asaxiy.uz/product/telefony-i-gadzhety/telefony',
-    headers=headers
+    'https://asaxiy.uz/product/',
+    headers=headers,params=q
 )
 htmldom = bs(site.text, 'lxml')
 get_needed_div = htmldom.find_all('div', class_='product__item d-flex flex-column justify-content-between')
@@ -18,10 +18,10 @@ for aaaa in get_needed_div:
     counter += 1
     a =aaaa.find('a').get('href')
     all_images[f"product_{counter}"] = f"{a}"
-# print(all_images)
+print(all_images)
 
-# with open('detail.html','w', encoding='UTF8') as file:
-#     file.write(site.text)
+with open('search.html','w', encoding='UTF8') as file:
+    file.write(site.text)
 #
 # with open('asaxiy.html', encoding='UTF8') as file:
 #     html = file.read()
